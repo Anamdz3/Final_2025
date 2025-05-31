@@ -1,6 +1,6 @@
 ---
 title: "Covid91 vaccine study Final2024"
-author: "Put your name here!"
+author: "Ana Mendez"
 output: 
   html_document:
     number_sections: true
@@ -24,8 +24,25 @@ mutate(across(where(is.character), as.factor))
 
 A new  preventative vaccine (covid921) is under test in clinical trials. Given the nature of this vaccine it is suspected that the drug may exhibit different effectiveness across the variety of subpopulations tracked. Consider population subgroups by gender( guys and gals), drug use, and sexual orientation. Write a complete report that separately considers this drug for each subgroup and your recommendations as to whether people in the subgroup should take the vaccine. Structure your report in four sections each devoted to one of the four subgroups, use null and alternative hypothesis statements and correct statistical verbage when referencing p-values in conclusions.
 
+# Methods
+Looking at the data collected, this will be categorical explained by categorical statistical problem, we will create separate data variables for each group to separate and test each of them. We will use the candP helper file to use R studios built in bar charts to display data graphically. W will also use xtabs to find the percentages relevant to the data. In this case we are only comparing two types of data and therefore we do not need to use any loops to measure multiple variables in the Fisher test or run a FisherXY.
+
+
 ## Males
 
+###Barplot
+
+```{r}More actions
+dd2 <- male %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+basicC <- ggplot(dd2,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+
+The bar chart above shows the graphical outcomes for males, based on the collected data. It compares the rates of contracting Covid-19 as compared to vaccination status. The left shows people who contracted Covid-19 and the right shows men who have not.More actions
+
+This clearly shows that more than twice the percentage of people who are in the placebo group contracted Covid where people who did not contract Covid are very closely related.
 
 ## Females
 
